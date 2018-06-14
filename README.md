@@ -22,7 +22,7 @@ import (
 )
 
 // first, you should get the file path string of the hsperfdata file that you want to parser.
-// there are several function to get the path, include PerfDataPath(pid string), PerfDataPaths(pids []string), UserPerfDataPaths(user string), CurrentUserPerfDataPaths(), AllPerfDataPaths(), PidsByProcessName(processName string)
+// there are several function to get the path, include PerfDataPath(pid string), PerfDataPaths(pids []string), UserPerfDataPaths(user string), CurrentUserPerfDataPaths(), AllPerfDataPaths(), DataPathsByProcessName(processName string)
 // the source code is easy to read through, you can just read the hsperfdata.go to figure out how to use them.
 
 entryMap, err := hsperfdata.ReadPerfData(filePath, true)

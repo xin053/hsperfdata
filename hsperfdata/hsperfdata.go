@@ -178,8 +178,8 @@ func AllPerfDataPaths() (map[string]string, error) {
 	return filePaths, nil
 }
 
-// PidsByProcessName get pids by the given process name
-func PidsByProcessName(processName string) (map[string]string, error) {
+// DataPathsByProcessName get data paths by the given process name
+func DataPathsByProcessName(processName string) (map[string]string, error) {
 	var out []byte
 	var err error
 	if runtime.GOOS == "windows" {
@@ -191,7 +191,7 @@ func PidsByProcessName(processName string) (map[string]string, error) {
 		return nil, err
 	}
 
-	processMap := make(map[string]string)
+	filePaths := make(map[string]string)
 	buffer := bytes.NewBuffer(out)
 	for {
 		line, err := buffer.ReadString('\n')
@@ -206,9 +206,13 @@ func PidsByProcessName(processName string) (map[string]string, error) {
 		}
 		fields := strings.Fields(line)
 		pid := fields[1]
-		processMap[pid] = processName
+		filePath, err := PerfDataPath(pid)
+		if err != nil {
+			continue
+		}
+		filePaths[pid] = filePath
 	}
-	return processMap, nil
+	return filePaths, nil
 }
 
 // removeNull remove trailing '\x00' byte of s

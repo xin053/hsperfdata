@@ -209,7 +209,7 @@ func Test_removeNull(t *testing.T) {
 	}
 }
 
-func TestPidsByProcessName(t *testing.T) {
+func TestDataPathsByProcessName(t *testing.T) {
 	type args struct {
 		processName string
 	}
@@ -221,20 +221,20 @@ func TestPidsByProcessName(t *testing.T) {
 	}{
 		{
 			"1",
-			args{"winhex"},
-			map[string]string{"27608": "winhex"},
+			args{"java"},
+			map[string]string{"53516": "C:\\Users\\0686\\AppData\\Local\\Temp\\hsperfdata_0686\\53516"},
 			false,
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := PidsByProcessName(tt.args.processName)
+			got, err := DataPathsByProcessName(tt.args.processName)
 			if (err != nil) != tt.wantErr {
-				t.Errorf("PidsByProcessName() error = %v, wantErr %v", err, tt.wantErr)
+				t.Errorf("DataPathsByProcessName() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
 			if !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("PidsByProcessName() = %v, want %v", got, tt.want)
+				t.Errorf("DataPathsByProcessName() = %v, want %v", got, tt.want)
 			}
 		})
 	}
