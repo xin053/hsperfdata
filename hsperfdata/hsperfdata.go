@@ -205,9 +205,8 @@ func PidsByProcessName(processName string) (map[string]string, error) {
 			continue
 		}
 		fields := strings.Fields(line)
-		name := fields[0]
 		pid := fields[1]
-		processMap[pid] = name
+		processMap[pid] = processName
 	}
 	return processMap, nil
 }
