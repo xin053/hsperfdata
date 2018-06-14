@@ -1,0 +1,4 @@
+{
+    "go.inferGopath": true,
+    "git.ignoreLimitWarning": true
+}

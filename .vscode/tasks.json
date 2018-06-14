@@ -1,0 +1,76 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build windows hsperfdata",
+            "type": "shell",
+            "command": "go",
+            "args": [
+                "build",
+                "-ldflags",
+                "-w -s",
+                "${file}"
+            ],
+            "options": {
+                "env": {
+                    "GOPATH": "${workspaceFolder}/../../../../",
+                    "GOOS": "windows",
+                    "GOARCH": "amd64",
+                    // if you want to download somthings that needs to go through the GFW, please uncomment the follow two lines and run shadowsocks.
+                    // "http_proxy": "127.0.0.1:1080",
+                    // "https_proxy": "127.0.0.1:1080"
+                },
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": ["$go"]
+        },
+        {
+            "label": "build linux hsperfdata",
+            "type": "shell",
+            "command": "go",
+            "args": [
+                "build",
+                "-ldflags",
+                "-w -s",
+                "${file}"
+            ],
+            "options": {
+                "env": {
+                    "GOPATH": "${workspaceFolder}/../../../../",
+                    "GOOS": "linux",
+                    "GOARCH": "amd64",
+                    // if you want to download somthings that needs to go through the GFW, please uncomment the follow two lines and run shadowsocks.
+                    // "http_proxy": "127.0.0.1:1080",
+                    // "https_proxy": "127.0.0.1:1080"
+                },
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": ["$go"]
+        },
+        {
+            "label": "build mac hsperfdata",
+            "type": "shell",
+            "command": "go",
+            "args": [
+                "build",
+                "-ldflags",
+                "-w -s",
+                "${file}"
+            ],
+            "options": {
+                "env": {
+                    "GOPATH": "${workspaceFolder}/../../../../",
+                    "GOOS": "darwin",
+                    "GOARCH": "amd64",
+                    // if you want to download somthings that needs to go through the GFW, please uncomment the follow two lines and run shadowsocks.
+                    // "http_proxy": "127.0.0.1:1080",
+                    // "https_proxy": "127.0.0.1:1080"
+                },
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": ["$go"]
+        }
+    ]
+}
