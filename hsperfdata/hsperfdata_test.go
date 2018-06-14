@@ -222,7 +222,7 @@ func TestPidsByProcessName(t *testing.T) {
 		{
 			"1",
 			args{"winhex"},
-			map[string]string{"27608": "WinHex64.exe"},
+			map[string]string{"27608": "winhex"},
 			false,
 		},
 	}
