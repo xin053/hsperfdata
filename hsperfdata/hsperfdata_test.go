@@ -248,43 +248,43 @@ func TestReadPerfData(t *testing.T) {
 	tests := []struct {
 		name    string
 		args    args
-		want    [3]interface{}
+		want    [4]interface{}
 		wantErr bool
 	}{
 		{
 			"2036",
 			args{"../test-data/2036", false},
-			[3]interface{}{"1.6.0_45", "1.0", int64(20358139)},
+			[4]interface{}{"1.6.0_45", "1.0", int64(20358139), 245},
 			false,
 		},
 		{
 			"2956",
 			args{"../test-data/2956", false},
-			[3]interface{}{"1.7.0-u40-rel_19", "1.7", int64(0)},
+			[4]interface{}{"1.7.0-u40-rel_19", "1.7", int64(0), 218},
 			false,
 		},
 		{
 			"13223",
 			args{"../test-data/13223", true},
-			[3]interface{}{"1.6.0_65", "1.0", int64(11955673569)},
+			[4]interface{}{"1.6.0_65", "1.0", int64(11955673569), 212},
 			false,
 		},
 		{
 			"13984",
 			args{"../test-data/13984", true},
-			[3]interface{}{"1.8.0_172", "1.8", int64(85266870)},
+			[4]interface{}{"1.8.0_172", "1.8", int64(85266870), 254},
 			false,
 		},
 		{
 			"15192",
 			args{"../test-data/15192", true},
-			[3]interface{}{"1.8.0_92", "1.8", int64(34831378)},
+			[4]interface{}{"1.8.0_92", "1.8", int64(34831378), 253},
 			false,
 		},
 		{
 			"21916",
 			args{"../test-data/21916", false},
-			[3]interface{}{"1.8.0_31", "1.8", int64(0)},
+			[4]interface{}{"1.8.0_31", "1.8", int64(0), 253},
 			false,
 		},
 	}
@@ -303,6 +303,9 @@ func TestReadPerfData(t *testing.T) {
 			}
 			if !reflect.DeepEqual(got["sun.gc.collector.1.time"], tt.want[2]) {
 				t.Errorf("ReadPerfData() sun.gc.collector.1.time = %v, want %v", got["sun.gc.collector.1.time"], tt.want[2])
+			}
+			if !reflect.DeepEqual(len(got), tt.want[3]) {
+				t.Errorf("ReadPerfData() entries number = %v, want %v", len(got), tt.want[3])
 			}
 		})
 	}
