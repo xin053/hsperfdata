@@ -6,7 +6,7 @@ import (
 	"os"
 	"sort"
 
-	"github.com/xin053/hsperfdata/hsperfdata"
+	"github.com/xin053/hsperfdata"
 )
 
 func main() {

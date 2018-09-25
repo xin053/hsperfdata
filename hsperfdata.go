@@ -234,7 +234,10 @@ func ReadPerfData(filepath string, parserTime bool) (map[string]interface{}, err
 		if runtime.GOOS == "windows" {
 			// on windows, can not read the hsperfdata file when the java process is running, so we copy
 			// to a new file first, and read the file, then delete it.
-			_, err = exec.Command("cp", filepath, filepath+"_").Output()
+			_, err = exec.Command("powershell", "-c", "cp", filepath, filepath+"_").Output()
+			if err != nil {
+				return nil, err
+			}
 			data, err = ioutil.ReadFile(filepath + "_")
 			if err != nil {
 				return nil, err
