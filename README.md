@@ -18,7 +18,7 @@ import (
     "fmt"
     "log"
 
-    "github.com/xin053/hsperfdata/hsperfdata"
+    "github.com/xin053/hsperfdata"
 )
 
 // first, you should get the file path string of the hsperfdata file that you want to parser.
