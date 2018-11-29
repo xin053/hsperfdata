@@ -1,4 +1,6 @@
 # hsperfdata
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fxin053%2Fhsperfdata.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fxin053%2Fhsperfdata?ref=badge_shield)
+
 
 This is a golang parser for the newest V2 java HotSpot virtual machine performance data, support all platform theoretically.
 
@@ -105,3 +107,6 @@ The newest java HotSpot virtual machine performance data structures was V2 when 
 3. https://github.com/njwhite/telegraf/blob/master/plugins/inputs/hsperfdata/hsperfdata.go
 4. https://github.com/twitter/commons/blob/master/src/python/twitter/common/java/perfdata/bin/jammystat.py
 5. https://github.com/YaSuenag/hsbeat/blob/master/module/hotspot/hsperfdata/parser.go
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fxin053%2Fhsperfdata.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fxin053%2Fhsperfdata?ref=badge_large)
