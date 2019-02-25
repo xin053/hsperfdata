@@ -181,13 +181,14 @@ func AllPerfDataPaths() (map[string]string, error) {
 // DataPathsByProcessName get data paths by the given process name
 func DataPathsByProcessName(processName string) (map[string]string, error) {
 	var out []byte
+	var err error
 	if runtime.GOOS == "windows" {
-		out, _ = exec.Command("cmd", "/C", "tasklist /NH|findstr /i "+processName).Output()
+		out, err = exec.Command("cmd", "/C", "tasklist /NH|findstr /i "+processName).Output()
 	} else {
-		out, _ = exec.Command("sh", "-c", "ps -ef|grep -i "+processName+"|grep -v grep").Output()
+		out, err = exec.Command("sh", "-c", "ps -ef|grep -i "+processName+"|grep -v grep").Output()
 	}
-	if out == nil {
-		return nil, nil
+	if err != nil {
+		return nil, err
 	}
 
 	filePaths := make(map[string]string)
