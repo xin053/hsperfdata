@@ -7,6 +7,7 @@ package hsperfdata
 import (
 	"bytes"
 	"encoding/binary"
+	"errors"
 	"fmt"
 	"io"
 	"io/ioutil"
@@ -187,8 +188,8 @@ func DataPathsByProcessName(processName string) (map[string]string, error) {
 	} else {
 		out, err = exec.Command("sh", "-c", "ps -ef|grep -i "+processName+"|grep -v grep").Output()
 	}
-	if err != nil {
-		return nil, err
+	if err != nil || len(out) == 0 {
+		return nil, errors.New(processName + " is not running.")
 	}
 
 	filePaths := make(map[string]string)
@@ -336,3 +337,4 @@ func ReadPerfData(filepath string, parserTime bool) (map[string]interface{}, err
 	}
 	return entryMap, nil
 }
+
