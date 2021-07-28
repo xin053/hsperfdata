@@ -15,7 +15,6 @@
             ],
             "options": {
                 "env": {
-                    "GOPATH": "${workspaceFolder}/../../../../",
                     "GOOS": "windows",
                     "GOARCH": "amd64",
                     // if you want to download somthings that needs to go through the GFW, please uncomment the follow two lines and run shadowsocks.
@@ -38,7 +37,6 @@
             ],
             "options": {
                 "env": {
-                    "GOPATH": "${workspaceFolder}/../../../../",
                     "GOOS": "linux",
                     "GOARCH": "amd64",
                     // if you want to download somthings that needs to go through the GFW, please uncomment the follow two lines and run shadowsocks.
@@ -61,7 +59,6 @@
             ],
             "options": {
                 "env": {
-                    "GOPATH": "${workspaceFolder}/../../../../",
                     "GOOS": "darwin",
                     "GOARCH": "amd64",
                     // if you want to download somthings that needs to go through the GFW, please uncomment the follow two lines and run shadowsocks.

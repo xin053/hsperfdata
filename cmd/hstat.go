@@ -11,7 +11,7 @@ import (
 
 func main() {
 	if len(os.Args) == 1 {
-		fmt.Printf("Usage: hsstat pid\n")
+		fmt.Printf("Usage: hstat pid\n")
 		return
 	}
 

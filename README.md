@@ -1,51 +1,78 @@
 # hsperfdata
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fxin053%2Fhsperfdata.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fxin053%2Fhsperfdata?ref=badge_shield)
 
+## What's this?
 
 This is a golang parser for the newest V2 java HotSpot virtual machine performance data, support all platform theoretically.
 
-## What's this?
+## What's hsperfdata file?
 
 It is a log directory created by JVM while running your code. By default it is created inside the tmp folder of the operating system that you are using! This directory is a part of Java Performance counter. And the file in this directory is named by the pid number of java process.
+
+For example, if you are running a java process which pid is `1111`, the hsperfdata file is `%TEMP%/hsperfdata_<yourusername>/1111` on `windows`, `/tmp/hsperfdata_<yourusername>/1111` on `linux`.
 
 You can disable creating this directory by using `-XX:-UsePerfData` or `-XX:+PerfDisableSharedMem` which is not recommended.
 
 ## Used as a library
 
-You can just read the `cli.go` file at the root directory to figure out how to use.
+**First, you should get the file path string of the hsperfdata file that you want to parser, then use `ReadPerfData` function to parser the hsperfdata file**
 
+There are several functions to get the path, include `PerfDataPath(pid string)`, `PerfDataPaths(pids []string)`, `UserPerfDataPaths(user string)`, `CurrentUserPerfDataPaths()`, `AllPerfDataPaths()`, `DataPathsByProcessName(processName string)`.
+
+For how to use these functions, look at [`hsperfdata function documentation`](https://pkg.go.dev/github.com/xin053/hsperfdata#section-documentation) or you can just read the [`hsperfdata.go`](./hsperfdata.go) to figure out how to use them, the source code is easy to read through.
+
+There is a demo using this project as a go library:
 
 ```go
-import (
-    "fmt"
-    "log"
+package main
 
-    "github.com/xin053/hsperfdata"
+import (
+	"fmt"
+	"log"
+	"sort"
+
+	"github.com/xin053/hsperfdata"
 )
 
-// first, you should get the file path string of the hsperfdata file that you want to parser.
-// there are several function to get the path, include PerfDataPath(pid string), PerfDataPaths(pids []string), UserPerfDataPaths(user string), CurrentUserPerfDataPaths(), AllPerfDataPaths(), DataPathsByProcessName(processName string)
-// the source code is easy to read through, you can just read the hsperfdata.go to figure out how to use them.
+func main() {
+	filePaths, err := hsperfdata.DataPathsByProcessName("java")
+	if err != nil {
+		log.Fatal(err)
+	}
 
-entryMap, err := hsperfdata.ReadPerfData(filePath, true)
-if err != nil {
-    log.Fatal("open fail", err)
-}
+	for pid := range filePaths {
+		entryMap, err := hsperfdata.ReadPerfData(filePaths[pid], true)
+		if err != nil {
+			log.Fatal("open fail", err)
+		}
 
-for _, key := range keys {
-    fmt.Printf("%s=%v\n", key, entryMap[key])
+		var keys []string
+		for k := range entryMap {
+			keys = append(keys, k)
+		}
+
+		sort.Strings(keys)
+
+		for _, key := range keys {
+			fmt.Printf("%s=%v\n", key, entryMap[key])
+		}
+	}
 }
 ```
 
 ## Used as a command
 
-### build yourself
+There is a demo [`hstat.go`](./cmd/hstat.go)
+
+### build hstat yourself
 
 ```shell
-export GOPATH=`pwd`
-go get -d github.com/xin053/hsperfdata
-cd src/github.com/xin053/hsperfdata
-go build cli.exe
+# go1.12+
+go build .\cmd\hstat.go
+
+# Usage: hstat pid
+# if you have a java process which pid is 1111, then run this
+hstat 1111
 ```
 
 ### use the release package
