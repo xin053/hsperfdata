@@ -12,6 +12,5 @@
 *.out
 
 debug
-cli
-cli.exe
 hsperfdata/debug.test
+hstat*

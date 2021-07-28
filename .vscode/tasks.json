@@ -9,9 +9,11 @@
             "command": "go",
             "args": [
                 "build",
+                "-o",
+                "hstat_windows_amd64.exe",
                 "-ldflags",
                 "-w -s",
-                "${file}"
+                "cmd/hstat.go"
             ],
             "options": {
                 "env": {
@@ -31,9 +33,11 @@
             "command": "go",
             "args": [
                 "build",
+                "-o",
+                "hstat_linux_amd64",
                 "-ldflags",
                 "-w -s",
-                "${file}"
+                "cmd/hstat.go"
             ],
             "options": {
                 "env": {
@@ -53,9 +57,11 @@
             "command": "go",
             "args": [
                 "build",
+                "-o",
+                "hstat_darwin_amd64",
                 "-ldflags",
                 "-w -s",
-                "${file}"
+                "cmd/hstat.go"
             ],
             "options": {
                 "env": {
