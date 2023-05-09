@@ -248,6 +248,16 @@ func ReadPerfData(filepath string, parserTime bool) (map[string]interface{}, err
 			return nil, err
 		}
 	}
+
+	return ParsePerfDataFromBytes(data, parserTime)
+}
+
+// ParsePerfDataFromBytes parser hotspot performance data, and return a map represented entries' name and value,
+// "ticks" are the unit of measurement of time in the Hotspot JVM.
+// when the parserTime is true, tick time value will be parsered to a normal nanoseconds using
+// the "sun.os.hrt.frequency" key in the hsperfdata.
+func ParsePerfDataFromBytes(data []byte, parserTime bool) (map[string]interface{}, error) {
+	var err error
 	buffer := bytes.NewReader(data)
 
 	header := perfdataHeader{}
@@ -337,4 +347,3 @@ func ReadPerfData(filepath string, parserTime bool) (map[string]interface{}, err
 	}
 	return entryMap, nil
 }
-
